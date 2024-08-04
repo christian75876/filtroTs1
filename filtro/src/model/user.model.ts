@@ -1,4 +1,5 @@
-import { Table, Model, Column, AutoIncrement, PrimaryKey, DataType, AllowNull } from "sequelize-typescript";
+import { Table, Model, Column, AutoIncrement, PrimaryKey, DataType, AllowNull, HasMany } from "sequelize-typescript";
+import { Sale } from "./sale.model";
 
 @Table({
     tableName: "users",
@@ -22,5 +23,9 @@ export class User extends Model {
         DataType.STRING(255),
     )
     password!: string;
+
+    @HasMany(()=>Sale)
+    sales!: Sale[];
+    
 };
 

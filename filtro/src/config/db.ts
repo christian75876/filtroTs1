@@ -1,6 +1,8 @@
 import { Sequelize } from "sequelize-typescript";
 import { User } from "../model/user.model";
 import dotenv from "dotenv";
+import { Product } from "../model/product.model";
+import { Sale } from "../model/sale.model";
 
 dotenv.config();
 
@@ -11,7 +13,7 @@ const sequelize: Sequelize = new Sequelize({
   username: "avnadmin",
   password: process.env.DB_PASS,
   database: "defaultdb",
-  models: [User],
+  models: [User, Product, Sale],
 });
 
 export default sequelize;
