@@ -24,4 +24,12 @@ export class UserService {
   async findByEmail(email:string): Promise<User | null> {
     return this.userReppository.getUserByEmail(email);
   };
+
+  async deleteUser (id: number): Promise<void> {
+    return this.userReppository.deleteUser(id)
+  };
+
+  async updateUser (id: number, user: Iuser): Promise<void> {
+    return this.userReppository.updateUser(id, user)
+  };
 }

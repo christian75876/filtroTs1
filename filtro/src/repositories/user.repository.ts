@@ -20,4 +20,12 @@ export class UserReppository {
     return User.findOne({ where: { email } });
   }
 
+  async deleteUser (id: number): Promise<void> {
+    await User.destroy({where: { id}});
+  };
+
+  async updateUser (id: number, user: Iuser): Promise<void> {
+    await User.update(user, { where: { id } });
+  };
+
 }

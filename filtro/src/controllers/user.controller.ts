@@ -63,6 +63,41 @@ export class UserController {
     }
   };
 
+  static async deleteUser(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const userService = container.resolve(UserService);
+      await userService.deleteUser(parseInt(id));
+      res.status(204).json({
+        status: 204,
+        message: "User deleted successfully.",
+      });
+    } catch (error) {
+      console.error(error);
+      res
+       .status(500)
+       .json({ message: "An error occurred while deleting user." });
+    }
+  };
+
+  static async updateUser(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+      const { email, password } = req.body;
+      const userService = container.resolve(UserService);
+      await userService.updateUser(parseInt(id), { email, password });
+      res.status(200).json({
+        status: 200,
+        message: "User updated successfully.",
+      });
+    } catch (error) {
+      console.error(error);
+      res
+       .status(500)
+       .json({ message: "An error occurred while updating user." });
+    }
+  };
+
   // static async findByEmail(req: Request, res: Response): Promise<void> {
   //   const email = req.body.email; 
   //   const emailService = container.resolve(UserService);
