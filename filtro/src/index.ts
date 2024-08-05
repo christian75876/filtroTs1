@@ -3,12 +3,14 @@ import Express from "express";
 import router from "./routes/Router";
 import sequelize from "./config/db";
 import { authMiddleware } from "./middlewares/auth.middleware";
+import { errorHandler } from "./middlewares/errorHandler.middleware";
 
 const app = Express();
 
 app.use(Express.json());
 router.use(authMiddleware);
 app.use("/api", router);
+router.use(errorHandler);
 
 
 const start = (): void => {

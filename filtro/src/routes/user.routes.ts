@@ -8,6 +8,7 @@ userRoutes.get("/:id", UserController.getUserById);
 userRoutes.post("/", UserController.createUser);
 userRoutes.delete("/:id", UserController.deleteUser);
 userRoutes.put("/:id", UserController.updateUser);
+userRoutes.get("/:id/products", UserController.getProductByUSer)
 
 
 

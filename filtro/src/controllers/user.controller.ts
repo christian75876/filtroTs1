@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { container, injectable } from "tsyringe";
 import { UserService } from "../services/user.service";
+import instance from "tsyringe/dist/typings/dependency-container";
 
 @injectable()
 export class UserController {
@@ -97,6 +98,25 @@ export class UserController {
        .json({ message: "An error occurred while updating user." });
     }
   };
+
+  static async getProductByUSer(req: Request, res: Response): Promise<void>{
+    try {
+      const id = req.params.id;
+      console.log('ID:',id);
+    const userService = container.resolve(UserService);
+    const products = await userService.getProductsByUser(parseInt(id));
+    res.status(200).json({
+      status: 200,
+      data: products,
+      message: "Products retrieved successfully.",
+    });
+    } catch (error) {
+      if(error instanceof  Error) {
+        console.error(error.message);
+        res.status(500).json({ message: ".Error in get products by user." });
+      }
+    }
+  }
 
   // static async findByEmail(req: Request, res: Response): Promise<void> {
   //   const email = req.body.email; 
